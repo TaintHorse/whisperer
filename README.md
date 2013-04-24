@@ -70,7 +70,7 @@ Invites a user to the room. Accepts on object with the following keys
 * __user__: The full JID of the user you're inviting
 * __message__: A brief message to the user
 
-### Events
+## Events
 
 ### `online`
 Emitted when the client connects. No payload
