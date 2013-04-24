@@ -1,6 +1,6 @@
 {
   "name": "whisperer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "IRC-like client wrapper around `node-xmpp`",
   "main": "index.js",
   "scripts": {
