@@ -1,0 +1,42 @@
+{
+  "name": "presence",
+  "attrs": {
+    "from": "tainthorsewhisperer@conference.jabber.org/other, other paul",
+    "to": "paul.sweeney@jabber.org/9f235c3755a94185",
+    "type": "unavailable",
+    "xmlns:stream": "http://etherx.jabber.org/streams"
+  },
+  "children": [
+    {
+      "name": "x",
+      "attrs": {
+        "xmlns": "http://jabber.org/protocol/muc#user"
+      },
+      "children": [
+        {
+          "name": "item",
+          "attrs": {
+            "affiliation": "none",
+            "role": "participant",
+            "nick": "newpaul"
+          },
+          "children": []
+        },
+        {
+          "name": "status",
+          "attrs": {
+            "code": "110"
+          },
+          "children": []
+        },
+        {
+          "name": "status",
+          "attrs": {
+            "code": "303"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

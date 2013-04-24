@@ -1,0 +1,36 @@
+{
+  "name": "message",
+  "attrs": {
+    "from": "tainthorsewhisperer@conference.jabber.org/other, other paul",
+    "to": "paul.sweeney@jabber.org/a60f0df5fb11b6eb",
+    "type": "groupchat",
+    "xmlns:stream": "http://etherx.jabber.org/streams"
+  },
+  "children": [
+    {
+      "name": "body",
+      "attrs": {},
+      "children": [
+        "whattup peeps!?"
+      ]
+    },
+    {
+      "name": "delay",
+      "attrs": {
+        "xmlns": "urn:xmpp:delay",
+        "stamp": "2013-04-24T03:44:07Z",
+        "from": "tainthorsewhisperer@conference.jabber.org"
+      },
+      "children": []
+    },
+    {
+      "name": "x",
+      "attrs": {
+        "xmlns": "jabber:x:delay",
+        "stamp": "20130424T03:44:07",
+        "from": "tainthorsewhisperer@conference.jabber.org"
+      },
+      "children": []
+    }
+  ]
+}
