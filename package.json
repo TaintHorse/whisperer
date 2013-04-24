@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
-  "author": "",
+  "repository": "git@github.com:TaintHorse/whisperer.git",
+  "author": "Paul Sweeney <paul@8-bitdesgin.com>",
   "license": "BSD",
   "dependencies": {
     "node-xmpp": "~0.3.2",

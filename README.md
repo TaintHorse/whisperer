@@ -20,15 +20,15 @@ client.on('message', function(message) {
 })
 ```
 
-### Methods
+## Methods
 
-#### Whisperer
+### Whisperer
 Constructor. Accepts on object with the following keys
 
 * __jid__: Your full XMPP username (user@server.com/optionalresource)
 * __password__: Your password
 
-#### `join`
+### `join`
 Joins a MUC. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
@@ -37,7 +37,7 @@ Joins a MUC. Accepts on object with the following keys
 * __lastSeen__: (optional) JS Parse-able date for the last time you logged in.
 Instructs the chat server to send by any message history it has since that time
 
-#### `message`
+### `message`
 Sends a message to either a specific user, or the whole MUC.
 Accepts on object with the following keys
 
@@ -45,25 +45,25 @@ Accepts on object with the following keys
 * __message__: The message you want to send
 * __nick__: (optional) A user's nick to send a private message to
 
-#### `part`
+### `part`
 Leaves a MUC. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
 * __message__: (optional) An optional parting message
 
-#### `part`
+### `part`
 Changes your nickname in the room. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
 * __nick__: Your new nickname in this room
 
-#### `topic`
+### `topic`
 Changes the topic for the room. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
 * __topic__: The new topic of the room
 
-#### `invite`
+### `invite`
 Invites a user to the room. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
@@ -72,10 +72,10 @@ Invites a user to the room. Accepts on object with the following keys
 
 ### Events
 
-#### `online`
+### `online`
 Emitted when the client connects. No payload
 
-#### `error`
+### `error`
 Emitted when the client encounters an error; example payload
 ``` json
 {
@@ -90,7 +90,7 @@ Emitted when the client encounters an error; example payload
 }
 ```
 
-#### `message`
+### `message`
 Emitted when a user in the room sends a message, or the room plays back the
 message history when you log in (look at the timestamp!)
 
@@ -108,7 +108,7 @@ Example payload:
 }
 ```
 
-#### `presence`
+### `presence`
 Emitted when the a user enters or exits the room, or changes their metadata
 (nickname, permissions, etc..)
 
