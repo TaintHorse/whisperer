@@ -79,7 +79,7 @@ Emitted when the client connects. No payload
 Emitted when the client encounters an error; example payload
 ``` json
 {
-  "from: "example@bconference.jabber.org",
+  "from": "example@bconference.jabber.org",
   "to": "example@jabber.org",
   "type": "error",
   "error": {
