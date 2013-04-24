@@ -19,6 +19,7 @@ function Client(opts, cb) {
   this.client.on('online', function() { self.emit('online') })
 
   this.client.on('stanza', function(stanza) {
+    console.log('stanza', stanza)
     if (stanza.type === 'error') {
       self.emit('error', parser.error(stanza))
     } else {
@@ -39,7 +40,7 @@ util.inherits(Client, events.EventEmitter);
 
 Client.prototype.send = function(stanza) {
   var cleaned = stanza.root().toString()
-  this.emit('sending', cleaned)
+  console.log('sending', cleaned)
   this.client.send(cleaned)
 }
 

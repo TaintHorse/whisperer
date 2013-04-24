@@ -51,7 +51,7 @@ Leaves a MUC. Accepts on object with the following keys
 * __jid__: The address of the MUC (roomname@server.com)
 * __message__: (optional) An optional parting message
 
-### `part`
+### `nick`
 Changes your nickname in the room. Accepts on object with the following keys
 
 * __jid__: The address of the MUC (roomname@server.com)
