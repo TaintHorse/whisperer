@@ -6,11 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@github.com:TaintHorse/whisperer.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:TaintHorse/whisperer.git"
+  },
   "author": "Paul Sweeney <paul@8-bitdesgin.com>",
   "license": "BSD",
   "dependencies": {
     "node-xmpp": "~0.3.2",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "hat": "0.0.3"
   }
 }

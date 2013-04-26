@@ -1,9 +1,9 @@
 var XMPP    = require("node-xmpp")
   , util    = require("util")
   , events  = require("events")
-  , _       = require('underscore')
+  , _       = require("underscore")
+  , hat     = require("hat")
   , isodate = require("./lib/isodate")
-  , parser  = require("./lib/parser")
 
 
 function Client(opts, cb) {
@@ -14,21 +14,23 @@ function Client(opts, cb) {
   this.user = jid
   this.rooms = {}
 
+  this.getUID = hat.rack() // Random, non-colliding UID generator
+
   this.client = new XMPP.Client({jid: jid, password: pass})
 
   this.client.on('online', function() { self.emit('online') })
 
   this.client.on('stanza', function(stanza) {
-    console.log('stanza', stanza)
+    var event = stanza.name
+      , ns
+
     if (stanza.type === 'error') {
-      self.emit('error', parser.error(stanza))
-    } else {
-      if (typeof parser[stanza.name] === 'function') {
-        self.emit(stanza.name, parser[stanza.name](stanza))
-      } else {
-        self.emit(stanza.name, parser(stanza))
-      }
+      event = 'error'
+    } else if (stanza.type === 'result') {
+      ns = stanza.getChild('query').attrs.xmlns
+      event = ns.split('#').pop() // either .../disco#items or .../disco#info
     }
+    self.emit(event, stanza.toString())
   })
 
   if (typeof cb === 'function') {
@@ -60,7 +62,7 @@ Client.prototype.join = function(opts) {
     return this.error('`join` requires a `nick` and `jid`')
   }
 
-  var stanza = new XMPP.Presence({ from: this.user, to: jid+'/'+nick })
+  var stanza = new XMPP.Presence({ to: jid+'/'+nick })
                         .c('x', {xmlns: 'http://jabber.org/protocol/muc' })
 
   if (lastSeen) { stanza.c('history', {since: isodate(new Date(lastSeen))}).up() }
@@ -74,12 +76,13 @@ Client.prototype.message = function(opts) {
   var jid = opts.jid
     , nick = opts.nick
     , message = opts.message
+    , id = opts.id || this.getUID()
     , stanza
 
   if (nick) { // Private message
-    stanza = new XMPP.Message({to: jid+'/'+nick, type: 'chat'})
+    stanza = new XMPP.Message({to: jid+'/'+nick, type: 'chat', id: id})
   } else { // Room message
-    stanza = new XMPP.Message({from: this.user, to: jid, type: 'groupchat'})
+    stanza = new XMPP.Message({to: jid, type: 'groupchat', id: id})
   }
 
   this.send(stanza.c('body').t(message))
@@ -122,7 +125,7 @@ Client.prototype.invite = function(opts) {
   var jid = opts.jid
     , user = opts.user
     , reason = opts.message
-    , stanza = new XMPP.Message({from: this.user, to: jid })
+    , stanza = new XMPP.Message({ to: jid })
 
   stanza
     .c('x', {xmlns: 'http://jabber.org/protocol/muc#user'})
@@ -131,6 +134,24 @@ Client.prototype.invite = function(opts) {
   if (reason) { stanza.c('reason').t(reason) }
 
   this.send(stanza)
+}
+
+Client.prototype.query = function(opts) {
+  var resource = opts.resource
+    , type = opts.type
+    , id = opts.id || this.getUID()
+    , stanza = new XMPP.Iq({ to: resource, type: 'get', id: id })
+
+  stanza.c('query', {xmlns: 'http://jabber.org/protocol/disco#'+type })
+  this.send(stanza)
+}
+
+Client.prototype.info = function(opts) {
+  this.query({ resource: opts.resource, type: 'info', id: opts.id })
+}
+
+Client.prototype.items = function(opts) {
+  this.query({ resource: opts.resource, type: 'items', id: opts.id })
 }
 
 Client.prototype.ban = function() {
