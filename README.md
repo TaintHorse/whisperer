@@ -17,7 +17,7 @@ var Whisperer = require('whisperer')
 
 client.on('online', function() {
   client.join({ jid: 'example@conference.jabber.org', nick: 'example' })
-  client.message({to: my@friend.com, message: 'oh hai!'})
+  client.message({to: 'my@friend.com', message: 'oh hai!'})
 })
 ```
 
