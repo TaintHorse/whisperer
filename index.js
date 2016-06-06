@@ -42,7 +42,6 @@ util.inherits(Client, events.EventEmitter);
 
 Client.prototype.send = function(stanza) {
   var cleaned = stanza.root().toString()
-  console.log('sending', cleaned)
   this.client.send(cleaned)
 }
 
